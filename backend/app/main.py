@@ -1,9 +1,11 @@
 from fastapi import FastAPI
+from app.routers.teams import router as teams_router
 
 app = FastAPI(
     title="Predict11 API",
     version="0.1.0"
 )
+app.include_router(teams_router)
 
 @app.get("/")
 def root():
