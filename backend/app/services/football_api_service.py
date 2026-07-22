@@ -34,3 +34,29 @@ def get_teams():
     data = response.json()
 
     return data["response"]
+
+def get_matches(team_id: int, season: int = 2024):
+
+    url = f"{BASE_URL}/fixtures"
+
+    headers = {
+        "x-apisports-key": API_KEY
+    }
+
+    params = {
+        "league": 262,
+        "season": season,
+        "team": team_id
+    }
+
+    response = httpx.get(
+        url,
+        headers=headers,
+        params=params
+    )
+
+    response.raise_for_status()
+
+    data = response.json()
+
+    return data["response"]

@@ -3,12 +3,18 @@ from pydantic import BaseModel
 
 class Match(BaseModel):
     id: int
-    home_team_id: int
-    away_team_id: int
+
+    home_team: str
+    away_team: str
+
+    home_logo: str
+    away_logo: str
+
     date: str
-    competition: str
-    round: int
-    stadium: str
-    home_score: int | None = None
-    away_score: int | None = None
+
+    league: str
+
     status: str
+
+    home_goals: int | None
+    away_goals: int | None

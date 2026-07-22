@@ -1,49 +1,28 @@
-def get_all_matches():
-    return [
-        {
-            "id": 1,
-            "home_team_id": 1,
-            "away_team_id": 2,
-            "date": "2026-07-20",
-            "competition": "Liga MX",
-            "round": 3,
-            "stadium": "Estadio Olímpico Universitario",
-            "home_score": None,
-            "away_score": None,
-            "status": "scheduled"
-        },
-        {
-            "id": 2,
-            "home_team_id": 3,
-            "away_team_id": 4,
-            "date": "2026-07-21",
-            "competition": "Liga MX",
-            "round": 3,
-            "stadium": "Estadio Akron",
-            "home_score": None,
-            "away_score": None,
-            "status": "scheduled"
-        },
-        {
-            "id": 3,
-            "home_team_id": 2,
-            "away_team_id": 1,
-            "date": "2026-07-28",
-            "competition": "Liga MX",
-            "round": 4,
-            "stadium": "Estadio Ciudad de los Deportes",
-            "home_score": None,
-            "away_score": None,
-            "status": "scheduled"
-        }
-    ]
+from app.schemas.match import Match
+from app.services.football_api_service import get_matches as get_matches_api
 
 
-def get_match_by_id(match_id: int):
-    matches = get_all_matches()
+def get_matches(team_id: int):
+
+    matches = get_matches_api(team_id)
+
+    result = []
 
     for match in matches:
-        if match["id"] == match_id:
-            return match
 
-    return None
+        result.append(
+            Match(
+                id=match["fixture"]["id"],
+                home_team=match["teams"]["home"]["name"],
+                away_team=match["teams"]["away"]["name"],
+                home_logo=match["teams"]["home"]["logo"],
+                away_logo=match["teams"]["away"]["logo"],
+                date=match["fixture"]["date"],
+                league=match["league"]["name"],
+                status=match["fixture"]["status"]["short"],
+                home_goals=match["goals"]["home"],
+                away_goals=match["goals"]["away"]
+            )
+        )
+
+    return result

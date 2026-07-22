@@ -1,5 +1,6 @@
-from app.services.football_api_service import get_teams
+from app.services.football_api_service import get_matches
 
-teams = get_teams()
+matches = get_matches(2289)
 
-print(teams)
+print(len(matches))
+print(matches[0])
