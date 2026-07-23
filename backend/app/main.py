@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from app.routers.teams import router as teams_router
 from app.routers.matches import router as matches_router
 from app.routers.standings import router as standings_router
+from app.routers.statistics import router as statistics_router
 
 app = FastAPI(
     title="Predict11 API",
@@ -33,4 +34,10 @@ app.include_router(
     standings_router,
     prefix="/standings",
     tags=["Standings"]
+)
+
+app.include_router(
+    statistics_router,
+    prefix="/statistics",
+    tags=["Statistics"]
 )
