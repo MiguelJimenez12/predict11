@@ -71,3 +71,14 @@ def get_standings():
     )
 
     return data["response"][0]["league"]["standings"][0]
+
+def get_head_to_head(home_team: int, away_team: int):
+
+    data = _get(
+        "fixtures/headtohead",
+        {
+            "h2h": f"{home_team}-{away_team}"
+        }
+    )
+
+    return data["response"]
