@@ -5,6 +5,7 @@ from app.routers.matches import router as matches_router
 from app.routers.standings import router as standings_router
 from app.routers.statistics import router as statistics_router
 from app.routers.head_to_head import router as head_to_head_router
+from app.routers.prediction import router as prediction_router
 
 app = FastAPI(
     title="Predict11 API",
@@ -47,4 +48,10 @@ app.include_router(
     head_to_head_router,
     prefix="/head-to-head",
     tags=["Head To Head"]
+)
+
+app.include_router(
+    prediction_router,
+    prefix="/predict",
+    tags=["Prediction"]
 )
