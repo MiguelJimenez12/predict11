@@ -72,6 +72,21 @@ def get_standings():
 
     return data["response"][0]["league"]["standings"][0]
 
+
+def get_statistics(team_id: int):
+
+    data = _get(
+        "teams/statistics",
+        {
+            "league": 262,
+            "season": 2024,
+            "team": team_id
+        }
+    )
+
+    return data["response"]
+
+
 def get_head_to_head(home_team: int, away_team: int):
 
     data = _get(
