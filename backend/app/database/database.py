@@ -1,7 +1,12 @@
+from os import getenv
+
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-DATABASE_URL = "postgresql://usuario:password@localhost:5432/predict11"
+load_dotenv()
+
+DATABASE_URL = getenv("DATABASE_URL")
 
 engine = create_engine(
     DATABASE_URL
