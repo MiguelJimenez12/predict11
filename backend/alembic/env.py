@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 from app.database.database import Base
 from app.models.user import User
+from app.models.prediction import Prediction
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
