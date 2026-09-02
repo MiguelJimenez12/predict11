@@ -16,4 +16,6 @@ def get_head_to_head(home_team: int, away_team: int):
             date=match["fixture"]["date"],
         )
         for match in matches
+        if match["goals"]["home"] is not None
+        and match["goals"]["away"] is not None
     ]

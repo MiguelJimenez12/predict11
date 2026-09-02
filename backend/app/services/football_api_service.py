@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+import ssl
 
 import httpx
 from dotenv import load_dotenv
@@ -8,7 +8,24 @@ load_dotenv()
 
 BASE_URL = "https://v3.football.api-sports.io"
 LEAGUE_ID = int(os.getenv("FOOTBALL_LEAGUE_ID", "262"))
-SEASON = int(os.getenv("FOOTBALL_SEASON", str(datetime.now().year)))
+SEASON = int(os.getenv("FOOTBALL_SEASON", "2024"))
+
+
+def _ssl_context():
+    """Use Windows trusted roots in Python installations that do not load them."""
+    context = ssl.create_default_context()
+    if hasattr(ssl, "VERIFY_X509_STRICT"):
+        context.verify_flags &= ~ssl.VERIFY_X509_STRICT
+    if os.name == "nt" and hasattr(ssl, "enum_certificates"):
+        for certificate, encoding, trust in ssl.enum_certificates("ROOT"):
+            if encoding == "x509_asn":
+                try:
+                    context.load_verify_locations(
+                        cadata=ssl.DER_cert_to_PEM_cert(certificate)
+                    )
+                except ssl.SSLError:
+                    continue
+    return context
 
 
 def _get(endpoint: str, params: dict):
@@ -22,7 +39,8 @@ def _get(endpoint: str, params: dict):
         f"{BASE_URL}/{endpoint}",
         headers={"x-apisports-key": api_key},
         params=params,
-        timeout=30.0
+        timeout=30.0,
+        verify=_ssl_context(),
     )
 
     response.raise_for_status()
