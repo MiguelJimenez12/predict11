@@ -15,3 +15,6 @@ class PredictionResponse(BaseModel):
     away_win_probability: float
 
     predicted_score: str
+    confidence: str
+    explanation: list[str]
+    data_source: str

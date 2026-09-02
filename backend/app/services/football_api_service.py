@@ -1,24 +1,26 @@
 import os
+from datetime import datetime
 
 import httpx
 from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEY = os.getenv("FOOTBALL_API_KEY")
-
 BASE_URL = "https://v3.football.api-sports.io"
-
-HEADERS = {
-    "x-apisports-key": API_KEY
-}
+LEAGUE_ID = int(os.getenv("FOOTBALL_LEAGUE_ID", "262"))
+SEASON = int(os.getenv("FOOTBALL_SEASON", str(datetime.now().year)))
 
 
 def _get(endpoint: str, params: dict):
+    api_key = os.getenv("FOOTBALL_API_KEY")
+    if not api_key:
+        raise RuntimeError(
+            "FOOTBALL_API_KEY no esta configurada. Copia .env.example a .env."
+        )
 
     response = httpx.get(
         f"{BASE_URL}/{endpoint}",
-        headers=HEADERS,
+        headers={"x-apisports-key": api_key},
         params=params,
         timeout=30.0
     )
@@ -38,20 +40,20 @@ def get_teams():
     data = _get(
         "teams",
         {
-            "league": 262,
-            "season": 2024
+            "league": LEAGUE_ID,
+            "season": SEASON
         }
     )
 
     return data["response"]
 
 
-def get_matches(team_id: int, season: int = 2024):
+def get_matches(team_id: int, season: int = SEASON):
 
     data = _get(
         "fixtures",
         {
-            "league": 262,
+            "league": LEAGUE_ID,
             "season": season,
             "team": team_id
         }
@@ -65,8 +67,8 @@ def get_standings():
     data = _get(
         "standings",
         {
-            "league": 262,
-            "season": 2024
+            "league": LEAGUE_ID,
+            "season": SEASON
         }
     )
 
@@ -78,8 +80,8 @@ def get_statistics(team_id: int):
     data = _get(
         "teams/statistics",
         {
-            "league": 262,
-            "season": 2024,
+            "league": LEAGUE_ID,
+            "season": SEASON,
             "team": team_id
         }
     )

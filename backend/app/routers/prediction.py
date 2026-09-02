@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
 from app.schemas.prediction import (
     PredictionRequest,
@@ -15,8 +15,7 @@ router = APIRouter()
     response_model=PredictionResponse
 )
 def predict(request: PredictionRequest):
-
-    return predict_match(
-        request.home_team,
-        request.away_team
-    )
+    try:
+        return predict_match(request.home_team, request.away_team)
+    except ValueError as error:
+        raise HTTPException(status_code=400, detail=str(error)) from error
