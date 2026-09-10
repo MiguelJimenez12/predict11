@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -7,6 +9,8 @@ from app.routers.standings import router as standings_router
 from app.routers.statistics import router as statistics_router
 from app.routers.head_to_head import router as head_to_head_router
 from app.routers.prediction import router as prediction_router
+from app.routers.leagues import router as leagues_router
+from app.routers.predictions import router as predictions_router
 
 app = FastAPI(
     title="Predict11 API",
@@ -14,9 +18,18 @@ app = FastAPI(
     version="1.0.0"
 )
 
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv(
+        "ALLOWED_ORIGINS",
+        "http://localhost:5173,http://127.0.0.1:5173",
+    ).split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=allowed_origins,
     allow_origin_regex=r"http://(localhost|127\.0\.0\.1):\d+",
     allow_credentials=True,
     allow_methods=["*"],
@@ -37,6 +50,12 @@ def root():
 def health():
     return {"status": "healthy"}
 
+
+app.include_router(
+    leagues_router,
+    prefix="/leagues",
+    tags=["Leagues"]
+)
 
 app.include_router(
     teams_router,
@@ -66,6 +85,12 @@ app.include_router(
     head_to_head_router,
     prefix="/head-to-head",
     tags=["Head To Head"]
+)
+
+app.include_router(
+    predictions_router,
+    prefix="/predictions",
+    tags=["ML Predictions"]
 )
 
 app.include_router(

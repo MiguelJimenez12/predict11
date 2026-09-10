@@ -29,8 +29,14 @@ class User(Base):
 
     password_hash = Column(
         String,
-        nullable=False
+        nullable=True
     )
+
+    auth_subject = Column(String, unique=True, nullable=True, index=True)
+    prediction_credits = Column(Integer, nullable=False, default=20, server_default="20")
+    last_credit_refresh = Column(DateTime(timezone=True), nullable=True)
+    subscription_type = Column(String, nullable=False, default="free", server_default="free")
+    subscription_status = Column(String, nullable=False, default="active", server_default="active")
 
     created_at = Column(
         DateTime(timezone=True),
