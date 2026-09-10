@@ -1,0 +1,1233 @@
+{
+  "version": 1,
+  "league": "bundesliga",
+  "algorithm": "multinomial logistic regression",
+  "features": [
+    "bias",
+    "elo_difference",
+    "recent_form",
+    "recent_goals_for",
+    "recent_goals_against",
+    "home_form",
+    "away_form"
+  ],
+  "training_matches": 1530,
+  "chronological_split_index": 1224,
+  "metrics": {
+    "matches": 306,
+    "accuracy": 0.4967,
+    "log_loss": 0.9627,
+    "brier_score": 0.575,
+    "precision": {
+      "home": 0.5363,
+      "draw": 0.3158,
+      "away": 0.463
+    },
+    "recall": {
+      "home": 0.7164,
+      "draw": 0.0741,
+      "away": 0.5495
+    },
+    "confusion_matrix": [
+      [
+        96,
+        4,
+        34
+      ],
+      [
+        51,
+        6,
+        24
+      ],
+      [
+        32,
+        9,
+        50
+      ]
+    ]
+  },
+  "weights": [
+    [
+      0.19727181316850242,
+      1.3001010728320077,
+      -0.6376468968894438,
+      0.6811691523155387,
+      0.5059789223913155,
+      0.13716396948505463,
+      0.007243620414955729
+    ],
+    [
+      -0.13129673542409642,
+      -0.07881637856241314,
+      0.6508595200622022,
+      -0.24204801621183059,
+      -0.5221611255930723,
+      0.26396149279012987,
+      0.33763129167911826
+    ],
+    [
+      -0.06597507774441241,
+      -1.2212846942696944,
+      -0.013212623172705475,
+      -0.43912113610371206,
+      0.0161822032017455,
+      -0.4011254622751834,
+      -0.3448749120940593
+    ]
+  ],
+  "teams": {
+    "Bayern Munich": {
+      "elo": 1684.49898343231,
+      "recent_points": [
+        3,
+        3,
+        0,
+        3,
+        0
+      ],
+      "recent_goals_for": [
+        5,
+        2,
+        1,
+        2,
+        2
+      ],
+      "recent_goals_against": [
+        1,
+        1,
+        3,
+        0,
+        4
+      ],
+      "home_goal_diffs": [
+        3,
+        -1,
+        1,
+        2,
+        1,
+        7,
+        -2,
+        2,
+        1,
+        2
+      ],
+      "away_goal_diffs": [
+        1,
+        1,
+        -3,
+        -1,
+        0,
+        3,
+        -1,
+        4,
+        -2,
+        -2
+      ]
+    },
+    "Hertha": {
+      "elo": 1400.4760600491888,
+      "recent_points": [
+        0,
+        3,
+        0,
+        1,
+        3
+      ],
+      "recent_goals_for": [
+        0,
+        2,
+        2,
+        1,
+        2
+      ],
+      "recent_goals_against": [
+        2,
+        1,
+        5,
+        1,
+        1
+      ],
+      "home_goal_diffs": [
+        2,
+        -5,
+        -2,
+        3,
+        2,
+        0,
+        -1,
+        -2,
+        1,
+        0
+      ],
+      "away_goal_diffs": [
+        -2,
+        -3,
+        -3,
+        -3,
+        -2,
+        0,
+        -3,
+        -2,
+        -3,
+        1
+      ]
+    },
+    "Dortmund": {
+      "elo": 1662.0327436934215,
+      "recent_points": [
+        1,
+        0,
+        3,
+        0,
+        3
+      ],
+      "recent_goals_for": [
+        1,
+        1,
+        5,
+        0,
+        4
+      ],
+      "recent_goals_against": [
+        1,
+        4,
+        1,
+        3,
+        0
+      ],
+      "home_goal_diffs": [
+        -1,
+        0,
+        2,
+        3,
+        -1,
+        2,
+        -1,
+        0,
+        4,
+        4
+      ],
+      "away_goal_diffs": [
+        3,
+        4,
+        0,
+        0,
+        2,
+        1,
+        2,
+        1,
+        -3,
+        -3
+      ]
+    },
+    "Augsburg": {
+      "elo": 1454.801331507185,
+      "recent_points": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "recent_goals_for": [
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "recent_goals_against": [
+        3,
+        3,
+        5,
+        1,
+        2
+      ],
+      "home_goal_diffs": [
+        0,
+        -1,
+        -1,
+        0,
+        1,
+        1,
+        0,
+        2,
+        -3,
+        -1
+      ],
+      "away_goal_diffs": [
+        -3,
+        1,
+        0,
+        -1,
+        6,
+        2,
+        -2,
+        -2,
+        -4,
+        -1
+      ]
+    },
+    "Freiburg": {
+      "elo": 1507.005373218971,
+      "recent_points": [
+        1,
+        0,
+        1,
+        1,
+        0
+      ],
+      "recent_goals_for": [
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "recent_goals_against": [
+        1,
+        2,
+        0,
+        1,
+        2
+      ],
+      "home_goal_diffs": [
+        0,
+        1,
+        -2,
+        0,
+        0,
+        -1,
+        -3,
+        0,
+        -1,
+        0
+      ],
+      "away_goal_diffs": [
+        1,
+        -1,
+        -2,
+        -3,
+        -1,
+        1,
+        3,
+        1,
+        0,
+        -1
+      ]
+    },
+    "Mainz": {
+      "elo": 1507.8402676650132,
+      "recent_points": [
+        1,
+        1,
+        1,
+        3,
+        3
+      ],
+      "recent_goals_for": [
+        1,
+        1,
+        1,
+        3,
+        3
+      ],
+      "recent_goals_against": [
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      "home_goal_diffs": [
+        0,
+        -1,
+        0,
+        1,
+        0,
+        2,
+        4,
+        3,
+        0,
+        3
+      ],
+      "away_goal_diffs": [
+        0,
+        0,
+        -1,
+        -2,
+        -1,
+        -7,
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "Leverkusen": {
+      "elo": 1757.007675677463,
+      "recent_points": [
+        1,
+        1,
+        3,
+        3,
+        3
+      ],
+      "recent_goals_for": [
+        1,
+        2,
+        5,
+        5,
+        2
+      ],
+      "recent_goals_against": [
+        1,
+        2,
+        1,
+        0,
+        1
+      ],
+      "home_goal_diffs": [
+        3,
+        4,
+        0,
+        3,
+        1,
+        2,
+        1,
+        5,
+        0,
+        1
+      ],
+      "away_goal_diffs": [
+        1,
+        1,
+        2,
+        1,
+        2,
+        1,
+        1,
+        0,
+        4,
+        5
+      ]
+    },
+    "Paderborn": {
+      "elo": 1366.2785075213867,
+      "recent_points": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "recent_goals_for": [
+        1,
+        1,
+        0,
+        1,
+        2
+      ],
+      "recent_goals_against": [
+        1,
+        5,
+        1,
+        3,
+        3
+      ],
+      "home_goal_diffs": [
+        0,
+        1,
+        -3,
+        -2,
+        -1,
+        -1,
+        0,
+        -5,
+        -4,
+        -2
+      ],
+      "away_goal_diffs": [
+        -2,
+        2,
+        0,
+        -1,
+        -2,
+        0,
+        0,
+        0,
+        -1,
+        -1
+      ]
+    },
+    "Werder Bremen": {
+      "elo": 1484.460374439303,
+      "recent_points": [
+        3,
+        3,
+        1,
+        1,
+        3
+      ],
+      "recent_goals_for": [
+        2,
+        3,
+        2,
+        1,
+        4
+      ],
+      "recent_goals_against": [
+        1,
+        0,
+        2,
+        1,
+        1
+      ],
+      "home_goal_diffs": [
+        2,
+        0,
+        2,
+        -1,
+        0,
+        -1,
+        -2,
+        1,
+        0,
+        3
+      ],
+      "away_goal_diffs": [
+        0,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        0,
+        -5,
+        3,
+        0
+      ]
+    },
+    "Fortuna Dusseldorf": {
+      "elo": 1433.8559469946367,
+      "recent_points": [
+        1,
+        0,
+        1,
+        1,
+        0
+      ],
+      "recent_goals_for": [
+        2,
+        0,
+        2,
+        1,
+        0
+      ],
+      "recent_goals_against": [
+        2,
+        1,
+        2,
+        1,
+        3
+      ],
+      "home_goal_diffs": [
+        1,
+        -1,
+        0,
+        -3,
+        0,
+        0,
+        1,
+        0,
+        -1,
+        0
+      ],
+      "away_goal_diffs": [
+        -5,
+        -3,
+        -3,
+        0,
+        2,
+        0,
+        0,
+        -5,
+        0,
+        -3
+      ]
+    },
+    "Wolfsburg": {
+      "elo": 1474.327642925474,
+      "recent_points": [
+        3,
+        3,
+        3,
+        0,
+        0
+      ],
+      "recent_goals_for": [
+        1,
+        2,
+        3,
+        0,
+        1
+      ],
+      "recent_goals_against": [
+        0,
+        1,
+        0,
+        2,
+        3
+      ],
+      "home_goal_diffs": [
+        -1,
+        0,
+        0,
+        0,
+        -1,
+        -2,
+        -2,
+        1,
+        3,
+        -2
+      ],
+      "away_goal_diffs": [
+        1,
+        0,
+        0,
+        -1,
+        0,
+        -2,
+        2,
+        -3,
+        1,
+        -2
+      ]
+    },
+    "FC Koln": {
+      "elo": 1443.5710872170027,
+      "recent_points": [
+        0,
+        1,
+        1,
+        3,
+        0
+      ],
+      "recent_goals_for": [
+        0,
+        1,
+        0,
+        3,
+        1
+      ],
+      "recent_goals_against": [
+        2,
+        1,
+        0,
+        2,
+        4
+      ],
+      "home_goal_diffs": [
+        0,
+        -4,
+        2,
+        -1,
+        -2,
+        -4,
+        1,
+        -2,
+        0,
+        1
+      ],
+      "away_goal_diffs": [
+        -2,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -2,
+        0,
+        -3
+      ]
+    },
+    "M'gladbach": {
+      "elo": 1466.2075599983295,
+      "recent_points": [
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      "recent_goals_for": [
+        3,
+        0,
+        2,
+        1,
+        0
+      ],
+      "recent_goals_against": [
+        4,
+        0,
+        2,
+        1,
+        4
+      ],
+      "home_goal_diffs": [
+        0,
+        2,
+        -1,
+        0,
+        3,
+        0,
+        -3,
+        -1,
+        0,
+        0
+      ],
+      "away_goal_diffs": [
+        -1,
+        0,
+        -2,
+        -2,
+        0,
+        0,
+        2,
+        -1,
+        0,
+        -4
+      ]
+    },
+    "Schalke 04": {
+      "elo": 1399.6533043371153,
+      "recent_points": [
+        3,
+        3,
+        0,
+        1,
+        0
+      ],
+      "recent_goals_for": [
+        2,
+        3,
+        0,
+        2,
+        2
+      ],
+      "recent_goals_against": [
+        1,
+        2,
+        6,
+        2,
+        4
+      ],
+      "home_goal_diffs": [
+        -2,
+        -5,
+        0,
+        0,
+        1,
+        0,
+        -3,
+        3,
+        1,
+        0
+      ],
+      "away_goal_diffs": [
+        -3,
+        0,
+        0,
+        2,
+        0,
+        -2,
+        -4,
+        1,
+        -6,
+        -2
+      ]
+    },
+    "Ein Frankfurt": {
+      "elo": 1544.4261065722635,
+      "recent_points": [
+        3,
+        0,
+        0,
+        1,
+        1
+      ],
+      "recent_goals_for": [
+        3,
+        1,
+        1,
+        1,
+        2
+      ],
+      "recent_goals_against": [
+        1,
+        2,
+        5,
+        1,
+        2
+      ],
+      "home_goal_diffs": [
+        1,
+        1,
+        0,
+        0,
+        2,
+        0,
+        0,
+        2,
+        -4,
+        0
+      ],
+      "away_goal_diffs": [
+        -3,
+        1,
+        0,
+        -2,
+        0,
+        1,
+        -2,
+        -3,
+        -1,
+        0
+      ]
+    },
+    "Hoffenheim": {
+      "elo": 1503.4676531671093,
+      "recent_points": [
+        3,
+        0,
+        1,
+        3,
+        3
+      ],
+      "recent_goals_for": [
+        4,
+        2,
+        1,
+        6,
+        4
+      ],
+      "recent_goals_against": [
+        3,
+        3,
+        1,
+        0,
+        2
+      ],
+      "home_goal_diffs": [
+        0,
+        0,
+        0,
+        -1,
+        1,
+        -3,
+        2,
+        1,
+        0,
+        2
+      ],
+      "away_goal_diffs": [
+        -2,
+        -3,
+        -1,
+        0,
+        1,
+        -2,
+        -1,
+        -3,
+        -1,
+        6
+      ]
+    },
+    "Union Berlin": {
+      "elo": 1483.194357230385,
+      "recent_points": [
+        0,
+        1,
+        0,
+        0,
+        3
+      ],
+      "recent_goals_for": [
+        1,
+        0,
+        3,
+        2,
+        2
+      ],
+      "recent_goals_against": [
+        5,
+        0,
+        4,
+        3,
+        1
+      ],
+      "home_goal_diffs": [
+        2,
+        1,
+        1,
+        0,
+        -2,
+        1,
+        -1,
+        -4,
+        -1,
+        1
+      ],
+      "away_goal_diffs": [
+        0,
+        -1,
+        -2,
+        0,
+        1,
+        -2,
+        0,
+        -2,
+        0,
+        -1
+      ]
+    },
+    "RB Leipzig": {
+      "elo": 1659.3299789401233,
+      "recent_points": [
+        3,
+        3,
+        1,
+        1,
+        1
+      ],
+      "recent_goals_for": [
+        2,
+        4,
+        1,
+        1,
+        2
+      ],
+      "recent_goals_against": [
+        1,
+        1,
+        1,
+        1,
+        2
+      ],
+      "home_goal_diffs": [
+        2,
+        -1,
+        -1,
+        2,
+        2,
+        2,
+        0,
+        3,
+        3,
+        0
+      ],
+      "away_goal_diffs": [
+        0,
+        -3,
+        0,
+        -1,
+        3,
+        4,
+        3,
+        1,
+        0,
+        0
+      ]
+    },
+    "Bielefeld": {
+      "elo": 1419.195970684433,
+      "recent_points": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "recent_goals_for": [
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "recent_goals_against": [
+        3,
+        3,
+        1,
+        2,
+        1
+      ],
+      "home_goal_diffs": [
+        0,
+        2,
+        0,
+        0,
+        1,
+        -1,
+        0,
+        -3,
+        0,
+        0
+      ],
+      "away_goal_diffs": [
+        2,
+        0,
+        2,
+        -2,
+        -3,
+        -1,
+        -4,
+        -4,
+        -2,
+        -1
+      ]
+    },
+    "Stuttgart": {
+      "elo": 1633.5623474349127,
+      "recent_points": [
+        0,
+        1,
+        3,
+        3,
+        3
+      ],
+      "recent_goals_for": [
+        1,
+        2,
+        3,
+        1,
+        4
+      ],
+      "recent_goals_against": [
+        2,
+        2,
+        1,
+        0,
+        0
+      ],
+      "home_goal_diffs": [
+        0,
+        3,
+        3,
+        2,
+        0,
+        2,
+        0,
+        3,
+        2,
+        4
+      ],
+      "away_goal_diffs": [
+        -2,
+        -1,
+        2,
+        1,
+        1,
+        3,
+        1,
+        -1,
+        0,
+        1
+      ]
+    },
+    "Greuther Furth": {
+      "elo": 1391.8065857860388,
+      "recent_points": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "recent_goals_for": [
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "recent_goals_against": [
+        0,
+        4,
+        1,
+        3,
+        2
+      ],
+      "home_goal_diffs": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        -5,
+        0,
+        -2,
+        -3,
+        -2
+      ],
+      "away_goal_diffs": [
+        -6,
+        -3,
+        0,
+        -3,
+        -3,
+        -1,
+        0,
+        0,
+        0,
+        -1
+      ]
+    },
+    "Bochum": {
+      "elo": 1441.4245303892105,
+      "recent_points": [
+        0,
+        3,
+        3,
+        0,
+        0
+      ],
+      "recent_goals_for": [
+        0,
+        3,
+        4,
+        0,
+        1
+      ],
+      "recent_goals_against": [
+        1,
+        2,
+        3,
+        5,
+        4
+      ],
+      "home_goal_diffs": [
+        0,
+        1,
+        0,
+        1,
+        -3,
+        -1,
+        0,
+        0,
+        1,
+        -5
+      ],
+      "away_goal_diffs": [
+        -2,
+        -4,
+        -2,
+        0,
+        -3,
+        -2,
+        -1,
+        -1,
+        1,
+        -3
+      ]
+    },
+    "Heidenheim": {
+      "elo": 1517.0915224154517,
+      "recent_points": [
+        0,
+        3,
+        1,
+        1,
+        3
+      ],
+      "recent_goals_for": [
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "recent_goals_against": [
+        2,
+        0,
+        1,
+        1,
+        1
+      ],
+      "home_goal_diffs": [
+        1,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        1,
+        -1,
+        0,
+        3
+      ],
+      "away_goal_diffs": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        -1,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    "Darmstadt": {
+      "elo": 1364.4840887032708,
+      "recent_points": [
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "recent_goals_for": [
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "recent_goals_against": [
+        0,
+        1,
+        3,
+        6,
+        4
+      ],
+      "home_goal_diffs": [
+        -1,
+        -3,
+        0,
+        -2,
+        -1,
+        -6,
+        -3,
+        -1,
+        -1,
+        -6
+      ],
+      "away_goal_diffs": [
+        0,
+        -1,
+        0,
+        0,
+        -2,
+        0,
+        -4,
+        2,
+        -3,
+        -4
+      ]
+    }
+  },
+  "data_through": "2024-05-18"
+}
