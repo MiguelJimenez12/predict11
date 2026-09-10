@@ -21,13 +21,20 @@ def _artifact(slug: str):
 def predict(slug: str, home_team: str, away_team: str) -> ModelPredictionResponse:
     if home_team == away_team:
         raise ValueError("Selecciona equipos diferentes.")
+    league = get_league(slug)
+    if not league.historical_code:
+        return ModelPredictionResponse(
+            league=slug, home_team=home_team, away_team=away_team,
+            home_win=0.44, draw=0.28, away_win=0.28,
+            confidence="baja", model_version=0, coverage="baseline",
+        )
     artifact = _artifact(slug)
     result = predict_artifact(artifact, home_team, away_team)
     best = max(result["home_win"], result["draw"], result["away_win"])
     return ModelPredictionResponse(
         league=slug,
         **result,
-        confidence="alta" if best >= 0.60 else "media" if best >= 0.48 else "baja",
+        confidence="baja" if result["coverage"] == "partial" else "alta" if best >= 0.60 else "media" if best >= 0.48 else "baja",
         model_version=artifact["version"],
     )
 

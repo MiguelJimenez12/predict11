@@ -12,6 +12,23 @@ from pathlib import Path
 
 OUTCOMES = ("home", "draw", "away")
 
+TEAM_NAME_ALIASES = {
+    "athleticclub": "athbilbao", "clubatleticodemadrid": "athmadrid", "caosasuna": "osasuna",
+    "rcdespanyoldebarcelona": "espanol", "rayovallecanodemadrid": "vallecano",
+    "realbetisbalompie": "betis", "realsociedaddefutbol": "sociedad", "deportivoalaves": "alaves",
+    "rcceltadevig": "celta", "manchestercity": "mancity", "manchesterunited": "manunited",
+    "nottinghamforest": "notmforest", "brightonhovealbion": "brighton", "acmilan": "milan",
+    "acfiorentina": "fiorentina", "asroma": "roma", "atalantabc": "atalanta", "bolognafc1909": "bologna",
+    "fcinternazionalemilano": "inter", "parmacalcio1913": "parma", "sscnapoli": "napoli",
+    "ussassuolo": "sassuolo", "uslecce": "lecce", "1fckoln": "fckoln", "tsg1899hoffenheim": "hoffenheim",
+    "bayer04leverkusen": "leverkusen", "fcbayernmunchen": "bayernmunich", "svwerderbremen": "werderbremen",
+    "1fsvmainz05": "mainz", "borussiamonchengladbach": "mgladbach", "eintrachtfrankfurt": "einfrankfurt",
+    "1fcunionberlin": "unionberlin", "stadebrestois29": "brest", "olympiquedemarseille": "marseille",
+    "olympiquelyonnais": "lyon", "parissaintgermain": "parissg", "staderennaisfc1901": "rennes",
+    "estroyesac": "troyes", "angerssco": "angers", "lehavreac": "lehavre",
+    "racingclubdelens": "lens", "asmonaco": "monaco", "rcstrasbourgalsace": "strasbourg",
+}
+
 
 @dataclass
 class MatchRecord:
@@ -222,17 +239,28 @@ def load_artifact(path: Path) -> dict:
 def predict_artifact(artifact: dict, home_team: str, away_team: str) -> dict:
     normalized = {normalize_team_name(name): (name, state) for name, state in artifact["teams"].items()}
 
+    def baseline_state():
+        states = list(artifact["teams"].values())
+        fields = ("recent_points", "recent_goals_for", "recent_goals_against", "home_goal_diffs", "away_goal_diffs")
+        return {
+            "elo": _average([item["elo"] for item in states], 1500.0),
+            **{field: [_average([_average(item[field]) for item in states], 0.0)] for field in fields},
+        }
+
     def resolve(name):
         key = normalize_team_name(name)
         if key in normalized:
-            return normalized[key]
+            return (*normalized[key], False)
+        alias = TEAM_NAME_ALIASES.get(key)
+        if alias in normalized:
+            return (*normalized[alias], False)
         candidates = [value for candidate, value in normalized.items() if candidate in key or key in candidate]
         if len(candidates) == 1:
-            return candidates[0]
-        raise ValueError(f"El equipo '{name}' no existe en el modelo de {artifact['league']}.")
+            return (*candidates[0], False)
+        return name, baseline_state(), True
 
-    home_name, home_raw = resolve(home_team)
-    away_name, away_raw = resolve(away_team)
+    home_name, home_raw, home_baseline = resolve(home_team)
+    away_name, away_raw, away_baseline = resolve(away_team)
 
     def state(raw):
         item = TeamState(elo=raw["elo"])
@@ -247,4 +275,5 @@ def predict_artifact(artifact: dict, home_team: str, away_team: str) -> dict:
         "home_win": round(values[0], 4),
         "draw": round(values[1], 4),
         "away_win": round(values[2], 4),
+        "coverage": "partial" if home_baseline or away_baseline else "historical",
     }

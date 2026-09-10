@@ -1,7 +1,7 @@
 import unittest
 from datetime import datetime, timedelta
 
-from app.ml.historical_model import MatchRecord, build_examples, evaluate, fit, parse_csv
+from app.ml.historical_model import MatchRecord, build_examples, evaluate, fit, parse_csv, predict_artifact
 
 
 class HistoricalModelTest(unittest.TestCase):
@@ -19,3 +19,17 @@ class HistoricalModelTest(unittest.TestCase):
         metrics = evaluate(weights, examples[15:])
         self.assertEqual(metrics["matches"], 5)
         self.assertGreaterEqual(metrics["accuracy"], 0)
+
+    def test_resolves_provider_aliases_and_handles_new_teams(self):
+        artifact = {
+            "league": "la-liga", "weights": [[0.0] * 7 for _ in range(3)],
+            "teams": {
+                "Ath Bilbao": {"elo": 1520, "recent_points": [2], "recent_goals_for": [1], "recent_goals_against": [1], "home_goal_diffs": [1], "away_goal_diffs": [0]},
+                "Barcelona": {"elo": 1600, "recent_points": [2], "recent_goals_for": [2], "recent_goals_against": [1], "home_goal_diffs": [1], "away_goal_diffs": [0]},
+            },
+        }
+        aliased = predict_artifact(artifact, "Athletic Club", "FC Barcelona")
+        self.assertEqual(aliased["home_team"], "Ath Bilbao")
+        self.assertEqual(aliased["coverage"], "historical")
+        promoted = predict_artifact(artifact, "New Club", "FC Barcelona")
+        self.assertEqual(promoted["coverage"], "partial")

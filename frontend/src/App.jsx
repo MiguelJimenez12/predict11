@@ -78,9 +78,11 @@ function App() {
         predicted_score: '1X2',
         confidence: data.confidence,
         explanation: [
-          'Modelo entrenado cronológicamente con cinco temporadas históricas.',
+          ...(data.coverage === 'baseline' ? ['Champions League usa una comparativa base: todavía no hay un modelo histórico validado para esta competencia.'] : []),
+          ...(data.coverage === 'partial' ? ['Al menos un equipo no aparece en las cinco temporadas históricas; se aplicó una referencia promedio de su liga.'] : []),
+          ...(data.coverage === 'historical' ? ['Modelo entrenado cronológicamente con cinco temporadas históricas.'] : []),
           'Considera Elo, últimos cinco partidos, goles y rendimiento local/visitante.',
-          `Versión del modelo: ${data.model_version}`,
+          data.model_version ? `Versión del modelo: ${data.model_version}` : 'Resultado de referencia, no de modelo entrenado.',
         ],
       })
     } catch (error) {

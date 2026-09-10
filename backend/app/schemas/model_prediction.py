@@ -16,6 +16,7 @@ class ModelPredictionResponse(BaseModel):
     away_win: float
     confidence: str
     model_version: int
+    coverage: str = "historical"
 
 
 class ModelMetrics(BaseModel):
