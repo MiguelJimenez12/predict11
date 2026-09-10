@@ -1,3 +1,4 @@
+import httpx
 from fastapi import APIRouter, HTTPException, Query
 
 from app.schemas.league import League, LeagueMatch, LeagueStanding, LeagueTeam
@@ -15,7 +16,7 @@ def read_leagues():
 def read_league_teams(slug: str):
     try:
         return list_teams(slug)
-    except (ValueError, RuntimeError) as error:
+    except (ValueError, RuntimeError, httpx.HTTPError) as error:
         raise HTTPException(status_code=400, detail=str(error)) from error
 
 
@@ -28,7 +29,7 @@ def read_league_matches(
 ):
     try:
         return list_matches(slug, status=status, date_from=date_from, date_to=date_to)
-    except (ValueError, RuntimeError) as error:
+    except (ValueError, RuntimeError, httpx.HTTPError) as error:
         raise HTTPException(status_code=400, detail=str(error)) from error
 
 
@@ -36,5 +37,5 @@ def read_league_matches(
 def read_league_standings(slug: str):
     try:
         return standings(slug)
-    except (ValueError, RuntimeError) as error:
+    except (ValueError, RuntimeError, httpx.HTTPError) as error:
         raise HTTPException(status_code=400, detail=str(error)) from error

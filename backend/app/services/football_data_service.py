@@ -36,6 +36,8 @@ def _get(endpoint: str, params: dict | None = None) -> dict:
         params=params,
         timeout=30,
         verify=_ssl_context(),
+        # Ignore stale proxy variables inherited by local terminal sessions.
+        trust_env=False,
     )
     if response.status_code == 429:
         raise RuntimeError("Limite gratuito alcanzado. Espera un minuto e intenta de nuevo.")

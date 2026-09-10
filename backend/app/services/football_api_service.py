@@ -1,6 +1,7 @@
 import os
 import ssl
 
+import certifi
 import httpx
 from dotenv import load_dotenv
 
@@ -12,8 +13,8 @@ SEASON = int(os.getenv("FOOTBALL_SEASON", "2024"))
 
 
 def _ssl_context():
-    """Use Windows trusted roots in Python installations that do not load them."""
-    context = ssl.create_default_context()
+    """Build a trusted context without inheriting stale SSL_CERT_FILE values."""
+    context = ssl.create_default_context(cafile=certifi.where())
     if hasattr(ssl, "VERIFY_X509_STRICT"):
         context.verify_flags &= ~ssl.VERIFY_X509_STRICT
     if os.name == "nt" and hasattr(ssl, "enum_certificates"):
@@ -41,6 +42,8 @@ def _get(endpoint: str, params: dict):
         params=params,
         timeout=30.0,
         verify=_ssl_context(),
+        # Ignore stale proxy variables inherited by local terminal sessions.
+        trust_env=False,
     )
 
     response.raise_for_status()
